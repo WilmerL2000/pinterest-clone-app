@@ -8,6 +8,7 @@ import Loader from "./Loader";
 import GoBack from "./GoBack";
 import PinInfo from "./PinDetail/PinInfo";
 import PinImage from "./PinDetail/PinImage";
+import MenuItem from "./MenuItem";
 export {
     Header,
     UserInfo,
@@ -18,5 +19,7 @@ export {
     Loader,
     GoBack,
     PinImage,
-    PinInfo
+    PinInfo,
+    MenuItem
+
 }

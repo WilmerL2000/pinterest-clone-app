@@ -1,7 +1,4 @@
-'use client';
 import Image from 'next/image';
-import { signOut, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { IUserInfo } from '../types';
 
 type Props = {
@@ -9,8 +6,6 @@ type Props = {
 };
 
 export default function UserInfo({ userInfo }: Props) {
-  const { data: session } = useSession();
-
   return (
     <div className="flex flex-col items-center">
       <Image
@@ -27,15 +22,6 @@ export default function UserInfo({ userInfo }: Props) {
         <button className="bg-gray-200 p-2 px-3 font-semibold mt-5 rounded-full">
           Share
         </button>
-
-        {session?.user.email == userInfo.email ? (
-          <button
-            className="bg-gray-200 p-2 px-3 font-semibold mt-5 rounded-full"
-            onClick={() => signOut()}
-          >
-            Logout
-          </button>
-        ) : null}
       </div>
     </div>
   );

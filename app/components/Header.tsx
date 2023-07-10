@@ -1,23 +1,30 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { HiSearch, HiBell, HiChat } from 'react-icons/hi';
+import { BiDownArrow } from 'react-icons/bi';
 import { useRouter } from 'next/navigation';
 import { saveUserInfo } from '../actions/firebaseActions';
+import MenuItem from './MenuItem';
 
 type Props = {};
 
 export default function Header({}: Props) {
   const router = useRouter();
   const { data: session } = useSession();
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (session?.user) {
       saveUserInfo({ ...session?.user });
     }
   }, [session]);
+
+  const toggleOpen = useCallback(() => {
+    setIsOpen((value) => !value);
+  }, []);
 
   return (
     <div className="flex justify-between gap-3 md:gap-2 items-center p-6 ">
@@ -67,14 +74,43 @@ export default function Header({}: Props) {
       <HiChat className="text-[25px] md:text-[50px] text-gray-500 cursor-pointer" />
 
       {session?.user ? (
-        <Image
-          src={session.user.image}
-          onClick={() => router.push('/' + session?.user.email)}
-          alt="user-image"
-          width={60}
-          height={60}
-          className="hover:bg-gray-300 p-2 rounded-full cursor-pointer"
-        />
+        <div className="relative">
+          <div className="flex justify-center items-center py-2">
+            <Image
+              src={session.user.image}
+              onClick={() => router.push('/' + session?.user.email)}
+              alt="user-image"
+              width={70}
+              height={70}
+              className="hover:bg-gray-300 p-2 rounded-full cursor-pointer"
+            />
+            <BiDownArrow
+              onClick={toggleOpen}
+              className="text-[25px] md:text-[50px] text-gray-500 cursor-pointer"
+            />
+          </div>
+          {isOpen && (
+            <div
+              className="
+            absolute 
+            rounded-xl 
+            shadow-md
+            w-[40vw]
+            md:w-3/4 
+            bg-white 
+            overflow-hidden 
+            right-0 
+            top-12 
+            text-sm
+            mt-8
+          "
+            >
+              <div className="flex flex-col cursor-pointer">
+                <MenuItem label="Logout" onClick={() => signOut()} />
+              </div>
+            </div>
+          )}
+        </div>
       ) : (
         <button
           className="font-semibold p-2 px-4 rounded-full"
