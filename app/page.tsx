@@ -1,7 +1,12 @@
-import Image from 'next/image';
+import { getAllPins } from './actions/firebaseActions';
+import { PinList } from './components';
 
-export default function Home() {
+export default async function Home() {
+  const listOfPins = await getAllPins();
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24"></main>
+    <main className="p-3">
+      <PinList listOfPins={listOfPins} />
+    </main>
   );
 }

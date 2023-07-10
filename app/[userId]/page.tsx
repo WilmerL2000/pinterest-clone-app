@@ -1,7 +1,18 @@
-import React from 'react';
+import { getUserInfo, getUserPins } from '../actions/firebaseActions';
+import { PinList, UserInfo } from '../components';
 
-type Props = {};
+type Props = { params: string };
 
-export default function UserPage({}: Props) {
-  return <div>Profile</div>;
+export default async function UserPage({ params }: Props) {
+  const userInfo = await getUserInfo(params);
+
+  const listOfPins = await getUserPins(params);
+
+  return (
+    <>
+      <UserInfo userInfo={userInfo} />
+
+      <PinList listOfPins={listOfPins} />
+    </>
+  );
 }

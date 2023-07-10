@@ -9,6 +9,13 @@ const handler = NextAuth({
     }),
   ],
   // Callbacks for various authentication events
+  // callbacks: {
+  //   async signIn({ user, account, profile, email, credentials }) {
+  //     if (email) {
+  //       return { msg: 'yes' };
+  //     }
+  //   },
+  // },
 });
 
 export { handler as GET, handler as POST };

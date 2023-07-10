@@ -1,0 +1,1 @@
+export const emailFormatter = (userId: string) => userId.replace('%40', '@')
