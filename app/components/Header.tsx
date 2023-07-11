@@ -30,7 +30,7 @@ export default function Header({}: Props) {
   }, []);
 
   return (
-    <div className="flex justify-between gap-3 md:gap-2 items-center px-3 ">
+    <div className="flex justify-between gap-3 md:gap-2 items-center p-3">
       <Logo />
 
       <button
