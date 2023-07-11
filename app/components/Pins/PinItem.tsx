@@ -28,7 +28,6 @@ export default function PinItem({ pin }: Props) {
             before:absolute
             before:h-full 
             before:w-full
-            hover:before:bg-gray-300 
             before:opacity-50
             cursor-pointer
             group      
