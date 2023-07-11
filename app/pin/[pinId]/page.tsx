@@ -14,8 +14,8 @@ export default async function PinDetails({ params }: Props) {
         <GoBack />
       </div>
       <div
-        className="grid grid-cols-1 lg:grid-cols-2 md:gap-10 shadow-lg
-      rounded-2xl p-3 md:p-7 lg:p-12 xl:pb-16 "
+        className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-10 shadow-lg
+          rounded-3xl p-3 md:p-7 lg:p-12 xl:pb-16 "
       >
         <PinImage pinDetail={pinDetail} />
         <div>

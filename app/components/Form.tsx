@@ -13,9 +13,9 @@ import { uid } from 'uid';
 
 export default function Form() {
   const { data: session } = useSession();
-  const [title, setTitle] = useState<String>();
-  const [desc, setDesc] = useState<String>();
-  const [link, setLink] = useState<String>();
+  const [title, setTitle] = useState<String>('');
+  const [desc, setDesc] = useState<String>('');
+  const [link, setLink] = useState<String>('');
   const [file, setFile] = useState<File>();
   const [loading, setLoading] = useState<Boolean>(false);
   const router = useRouter();
@@ -36,8 +36,8 @@ export default function Form() {
         getDownloadURL(storageRef).then(async (url) => {
           const postData = {
             title: title,
-            desc: desc,
-            link: link,
+            desc: desc || '',
+            link: link || '',
             image: url,
             userName: session.user.name,
             email: session.user.email,
@@ -45,14 +45,15 @@ export default function Form() {
             id: postId,
           };
 
-          await setDoc(
-            doc(firebaseDB, 'pinterest-post', postId),
-            postData
-          ).then((resp) => {
-            console.log('Saved');
-            setLoading(false);
-            router.push('/');
-          });
+          await setDoc(doc(firebaseDB, 'pinterest-post', postId), postData)
+            .then((resp) => {
+              console.log('Saved');
+              setLoading(false);
+              router.push('/');
+            })
+            .catch((err) => {
+              setLoading(false);
+            });
         });
       });
   };
@@ -96,7 +97,7 @@ export default function Form() {
             <textarea
               onChange={(e) => setDesc(e.target.value)}
               placeholder="Tell everyone what your pin is about"
-              className=" outline-none  w-full mt-8 pb-4 text-[14px] border-b-[2px] border-gray-400 placeholder-gray-400"
+              className=" outline-none  w-full mt-8 pb-4 text-[20px] border-b-[2px] border-gray-400 placeholder-gray-400"
             />
             <input
               type="text"

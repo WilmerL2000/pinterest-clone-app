@@ -24,7 +24,7 @@ export default function UserTag({ user }: Props) {
           onClick={() => router.push(`/` + user.email)}
         >
           <Image
-            src={user.image}
+            src={user.image || 'placeholder.jpg'}
             alt="userImage"
             width={45}
             height={45}

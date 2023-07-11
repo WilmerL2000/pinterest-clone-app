@@ -17,10 +17,16 @@ export default function PinInfo({ pinDetail }: Props) {
   };
   return (
     <>
-      <DownloadBtn id={pinDetail.id} image={pinDetail.image} />
-      <h2 className="text-[30px] font-bold mb-10">{pinDetail.title}</h2>
-      <h2 className="mt-10">{pinDetail.desc}</h2>
-      <UserTag user={user} />
+      <DownloadBtn
+        id={pinDetail.id}
+        image={pinDetail.image}
+        styles="text-[55px] hover:bg-gray-200 rounded-full p-2"
+      />
+      <h2 className="text-[30px] font-bold mb-4 mt-8">{pinDetail.title}</h2>
+      <h2 className="mb-10">{pinDetail.desc}</h2>
+      <div className="mb-6 md:mb-0">
+        <UserTag user={user} />
+      </div>
     </>
   );
 }
