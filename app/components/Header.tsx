@@ -4,10 +4,13 @@ import Image from 'next/image';
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { HiSearch, HiBell, HiChat } from 'react-icons/hi';
-import { BiDownArrow } from 'react-icons/bi';
+import { BiSolidDownArrow } from 'react-icons/bi';
+import { IoIosCreate } from 'react-icons/io';
 import { useRouter } from 'next/navigation';
 import { saveUserInfo } from '../actions/firebaseActions';
 import MenuItem from './MenuItem';
+import Logo from './Logo';
+import UserTag from './UserTag';
 
 type Props = {};
 
@@ -27,66 +30,50 @@ export default function Header({}: Props) {
   }, []);
 
   return (
-    <div className="flex justify-between gap-3 md:gap-2 items-center p-6 ">
-      <Image
-        src="/logo.png"
-        alt="logo"
-        width={60}
-        height={60}
-        onClick={() => router.push('/')}
-        className="hover:bg-gray-300 p-2
-        rounded-full cursor-pointer"
-      />
+    <div className="flex justify-between gap-3 md:gap-2 items-center p-3 ">
+      <Logo />
 
       <button
         className="bg-black
          text-white p-3 px-6 rounded-full
-         text-[20px]
-          hidden md:block"
+         text-[18px] hidden md:block"
         onClick={() => router.push('/')}
       >
         Home
       </button>
       {session?.user && (
         <button
-          className="font-semibold p-3 px-6
-      rounded-full text-[20px]"
+          className="font-semibold p-3 px-6 rounded-full text-[18px]"
           onClick={() => router.push('/pin-builder')}
         >
-          Create
+          <span className="hidden md:block">Create</span>
+          <IoIosCreate className="text-[30px] text-gray-500 md:hidden" />
         </button>
       )}
 
       <div className="bg-[#e9e9e9] p-2 px-6 gap-3 items-center rounded-full w-full hidden md:flex">
-        <HiSearch
-          className="text-[34px] 
-        text-gray-500"
-        />
+        <HiSearch className="text-[25px] text-gray-500" />
         <input
           type="text"
           placeholder="Search"
-          className="bg-transparent outline-none w-full text-[25px]"
+          className="bg-transparent outline-none w-3/4 text-[20px]"
         />
       </div>
 
-      <HiSearch className="text-[25px] text-gray-500 md:hidden" />
-      <HiBell className="text-[25px] md:text-[50px] text-gray-500 cursor-pointer" />
-      <HiChat className="text-[25px] md:text-[50px] text-gray-500 cursor-pointer" />
-
       {session?.user ? (
-        <div className="relative">
-          <div className="flex justify-center items-center py-2">
+        <div className="relative z-10">
+          <div className="flex flex-row gap-1 justify-center items-center py-2 px-4 transition">
             <Image
-              src={session.user.image}
+              src={session.user.image || 'placeholder.jpg'}
               onClick={() => router.push('/' + session?.user.email)}
               alt="user-image"
               width={70}
               height={70}
               className="hover:bg-gray-300 p-2 rounded-full cursor-pointer"
             />
-            <BiDownArrow
+            <BiSolidDownArrow
+              className=" min-h-[25px] min-w-[25px] text-gray-500 cursor-pointer"
               onClick={toggleOpen}
-              className="text-[25px] md:text-[50px] text-gray-500 cursor-pointer"
             />
           </div>
           {isOpen && (
@@ -95,17 +82,20 @@ export default function Header({}: Props) {
             absolute 
             rounded-xl 
             shadow-md
-            w-[40vw]
-            md:w-3/4 
+            w-56
             bg-white 
             overflow-hidden 
             right-0 
             top-12 
             text-sm
             mt-8
+            p-3
           "
             >
-              <div className="flex flex-col cursor-pointer">
+              <div className="flex flex-col cursor-pointer items-center justify-center gap-3">
+                <div className="bg-gray-300 rounded-lg p-3">
+                  <UserTag user={session?.user} />
+                </div>
                 <MenuItem label="Logout" onClick={() => signOut()} />
               </div>
             </div>

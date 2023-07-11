@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 type Props = {
@@ -10,12 +13,15 @@ type Props = {
 };
 
 export default function UserTag({ user }: Props) {
+  const router = useRouter();
+
   return (
     <div className="">
       {user ? (
         <div
           className="flex gap-3 
-           items-center"
+           items-center cursor-pointer"
+          onClick={() => router.push(`/` + user.email)}
         >
           <Image
             src={user.image}
@@ -26,7 +32,6 @@ export default function UserTag({ user }: Props) {
           />
           <div>
             <h2 className="text-[14px] font-medium">{user.name}</h2>
-            <h2 className="text-[12px]">{user.email}</h2>
           </div>
         </div>
       ) : null}

@@ -12,6 +12,7 @@ export default function MenuItem({ onClick, label }: Props) {
             hover:bg-neutral-100 
             transition
             font-semibold
+            w-full
           "
     >
       {label}

@@ -1,7 +1,8 @@
 import React from 'react';
 import PinItem from './PinItem';
+import { IPin } from '@/app/types';
 
-type Props = { listOfPins: [] };
+type Props = { listOfPins: IPin[] };
 
 export default function PinList({ listOfPins }: Props) {
   return (

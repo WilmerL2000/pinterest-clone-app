@@ -1,6 +1,9 @@
+import { IPin } from '@/app/types';
 import Image from 'next/image';
 
-type Props = {};
+type Props = {
+  pinDetail: IPin;
+};
 
 export default function PinImage({ pinDetail }: Props) {
   return (

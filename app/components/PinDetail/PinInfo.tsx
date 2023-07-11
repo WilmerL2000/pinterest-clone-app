@@ -1,8 +1,13 @@
 'use client';
+
 import React from 'react';
 import UserTag from '../UserTag';
+import { IPin } from '@/app/types';
+import DownloadBtn from '../DownloadBtn';
 
-type Props = {};
+type Props = {
+  pinDetail: IPin;
+};
 
 export default function PinInfo({ pinDetail }: Props) {
   const user = {
@@ -12,15 +17,10 @@ export default function PinInfo({ pinDetail }: Props) {
   };
   return (
     <>
+      <DownloadBtn id={pinDetail.id} image={pinDetail.image} />
       <h2 className="text-[30px] font-bold mb-10">{pinDetail.title}</h2>
-      <UserTag user={user} />
       <h2 className="mt-10">{pinDetail.desc}</h2>
-      <button
-        className="p-2 bg-[#e9e9e9] px-5 text-[23px] mt-10 rounded-full hover:scale-105 transition-all"
-        onClick={() => window.open(pinDetail.link)}
-      >
-        Open Url
-      </button>
+      <UserTag user={user} />
     </>
   );
 }

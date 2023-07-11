@@ -7,7 +7,6 @@ export default async function UserPage({ params }: Props) {
   const userInfo = await getUserInfo(params);
 
   const listOfPins = await getUserPins(params);
-
   return (
     <>
       <UserInfo userInfo={userInfo} />
