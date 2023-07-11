@@ -63,7 +63,7 @@ export default function Header({}: Props) {
         <div className="relative z-10">
           <div className="flex flex-row justify-center items-center py-2 px-4">
             <Image
-              src={session.user.image || 'placeholder.jpg'}
+              src={session.user.image || '/placeholder.jpg'}
               onClick={() => router.push('/' + session?.user.email)}
               alt="user-image"
               width={70}

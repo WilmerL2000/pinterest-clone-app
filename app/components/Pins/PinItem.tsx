@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import UserTag from '../UserTag';
 import { IPin } from '@/app/types';
 import { FiArrowUpRight } from 'react-icons/fi';
 import DownloadBtn from '../DownloadBtn';
@@ -14,11 +13,6 @@ type Props = {
 
 export default function PinItem({ pin }: Props) {
   const router = useRouter();
-  const user = {
-    name: pin?.userName,
-    image: pin?.userImage,
-    email: pin?.email,
-  };
 
   return (
     <div
